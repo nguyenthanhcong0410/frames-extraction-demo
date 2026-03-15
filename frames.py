@@ -1,9 +1,7 @@
 import cv2
 import os
 
-
 raw_video = "green_apple.mp4"
-
 folder = "frames"
 
 #create folder if it doesn't exist
