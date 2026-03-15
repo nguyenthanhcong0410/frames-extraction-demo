@@ -14,7 +14,7 @@ if not cap.isOpened():
     exit()
 
 frame_in_second = cap.get(cv2.CAP_PROP_FPS)
-interval = int(frame_in_second) 
+interval = int(frame_in_second) #tui để ở đây mỗi frame cách nhau 1s nha, mốt có data của hưng ròi thì đổi lại cũng được
 
 save_count = 0
 frame_count = 0
