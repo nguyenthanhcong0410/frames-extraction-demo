@@ -1,14 +1,14 @@
 import cv2
 import os
 
-raw_video = "green_apple.mp4"
+raw_video_12h = "green_apple.mp4"
 folder = "frames"
 
 #create folder if it doesn't exist
 if not os.path.exists(folder):
     os.makedirs(folder)
 
-cap = cv2.VideoCapture(raw_video)
+cap = cv2.VideoCapture(raw_video_12h)
 
 frame_in_second = cap.get(cv2.CAP_PROP_FPS)
 interval = int(frame_in_second) #tui để đại ở đây là mỗi frame cách nhau 1s nha, mốt có data của hưng rồi thì đổi sau cũng được
