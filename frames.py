@@ -9,9 +9,12 @@ if not os.path.exists(folder):
     os.makedirs(folder)
 
 cap = cv2.VideoCapture(raw_video_12h)
+if not cap.isOpened():
+    print(f"Cannot open video {raw_video_12h}")
+    exit()
 
 frame_in_second = cap.get(cv2.CAP_PROP_FPS)
-interval = int(frame_in_second) #tui để đại ở đây là mỗi frame cách nhau 1s nha, mốt có data của hưng rồi thì đổi sau cũng được
+interval = int(frame_in_second) 
 
 save_count = 0
 frame_count = 0
