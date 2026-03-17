@@ -1,5 +1,6 @@
 import cv2
 import os
+from datetime import datetime, timedelta
 
 raw_video_12h = "fruit.mp4"
 folder = "12-03-2026"
@@ -14,10 +15,12 @@ if not cap.isOpened():
     exit()
 
 frame_in_second = cap.get(cv2.CAP_PROP_FPS)
+print(f"Frames per second: {frame_in_second}")
 interval = int(frame_in_second) #tui để ở đây mỗi frame cách nhau 1s nha, mốt có data của hưng ròi thì đổi lại cũng được
 
-save_count = 0
+save_count = 1
 frame_count = 0
+start_time = datetime.strptime("19-00-28", "%H-%M-%S")
 
 while True:
     ret, frame = cap.read()
@@ -26,13 +29,19 @@ while True:
         break
     
     if frame_count % interval == 0:
-        save_frame_name = os.path.join(folder, f"12-03-2026_frame_{save_count}.jpg")
-        cv2.imwrite(save_frame_name, frame)
+        current_time = start_time + timedelta(seconds = save_count - 1)
+        timestamp = current_time.strftime("%H-%M-%S")
+        
+        save_frame_name = os.path.join(folder, f"frame-{save_count}_{timestamp}.jpg")
+        print(os.path.abspath(save_frame_name))
+        
+        test_saved = cv2.imwrite(save_frame_name, frame)
+        print("Saved:", test_saved)
+        
         save_count += 1
     
     frame_count += 1
-    
 
 cap.release()
 
-print(f"Done {save_count} frames")
+print(f"Done {save_count - 1} frames")
