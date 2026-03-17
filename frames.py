@@ -2,7 +2,7 @@ import cv2
 import os
 
 raw_video_12h = "green_apple.mp4"
-folder = "frames"
+folder = "13-03-2026"
 
 #create folder if it doesn't exist
 if not os.path.exists(folder):
@@ -26,7 +26,7 @@ while True:
         break
     
     if frame_count % interval == 0:
-        save_frame_name = os.path.join(folder, f"frame_{save_count}.jpg")
+        save_frame_name = os.path.join(folder, f"13-03-2026_frame_{save_count}.jpg")
         cv2.imwrite(save_frame_name, frame)
         save_count += 1
     
