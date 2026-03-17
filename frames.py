@@ -36,7 +36,7 @@ while True:
         print(os.path.abspath(save_frame_name))
         
         test_saved = cv2.imwrite(save_frame_name, frame)
-        print("Saved:", test_saved)
+        print(f"Saved: {test_saved}")
         save_count += 1
     
     frame_count += 1
