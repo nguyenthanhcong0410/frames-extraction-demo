@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 cv2.setNumThreads(0)
 
 video_folder = r"c:\Users\THANH CONG\Documents\RESFES\demo\raw video"
+
 # Đường vào folder
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -95,11 +96,7 @@ if __name__ == "__main__":
             start = i * frames_per_process
             end = total_frames if i == cpu_count - 1 else (i + 1) * frames_per_process
 
-            p = multiprocessing.Process(
-                target = extract_frames,
-                args = (video_path, folder, start, end, fps, start_time)
-            )
-
+            p = multiprocessing.Process(target = extract_frames, args = (video_path, folder, start, end, fps, start_time))
             p.start()
             processes.append(p)
 
