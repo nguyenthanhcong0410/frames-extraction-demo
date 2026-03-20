@@ -2,6 +2,7 @@ import cv2
 import os
 import multiprocessing
 from datetime import datetime, timedelta
+import csv
 
 cv2.setNumThreads(0)
 
@@ -16,7 +17,7 @@ start_times = {
     "16-03-2026": "20-00-30"
 }
 
-def extract_frames(video_path, output_folder, start_frame, end_frame, fps, start_time):
+def extract_frames(video_path, output_folder, start_frame, end_frame, fps, start_time, results):
 
     cap = cv2.VideoCapture(video_path)
 
@@ -45,6 +46,10 @@ def extract_frames(video_path, output_folder, start_frame, end_frame, fps, start
             filename = os.path.join(output_folder, f"frame-{save_count}_{timestamp}.jpg")
 
             cv2.imwrite(filename, frame)
+            
+            # Test save frame
+            print(f"Saving: {filename}")
+            results.append([save_count, timestamp, filename])
 
             save_count += 1
 
@@ -89,6 +94,9 @@ if __name__ == "__main__":
         cpu_count = multiprocessing.cpu_count()
         frames_per_process = total_frames // cpu_count
 
+        manager = multiprocessing.Manager()
+        results = manager.list()
+
         processes = []
 
         for i in range(cpu_count):
@@ -96,11 +104,20 @@ if __name__ == "__main__":
             start = i * frames_per_process
             end = total_frames if i == cpu_count - 1 else (i + 1) * frames_per_process
 
-            p = multiprocessing.Process(target = extract_frames, args = (video_path, folder, start, end, fps, start_time))
+            p = multiprocessing.Process(target = extract_frames, args = (video_path, folder, start, end, fps, start_time, results))
             p.start()
             processes.append(p)
 
         for p in processes:
             p.join()
+
+        final_csv = os.path.join(folder, "frames_fruit.csv")
+
+        with open(final_csv, "w", newline="") as out_file:
+            writer = csv.writer(out_file)
+            writer.writerow(["frame_number", "timestamp", "file_directory"])
+
+            for row in results:
+                writer.writerow(row)
 
     print("Done extracting frames")
