@@ -11,7 +11,7 @@ video_folder = r"c:\Users\THANH CONG\Documents\RESFES\demo\raw video"
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 start_times = {
-    "12-03-2026": "10-00-27", # 3 dòng này có thể thay đổi tùy vào video hưng với tri quay là ngày với giờ nào
+    "12-03-2026": "10-00-27", # 3 dòng này có thể thay đổi tùy vào video hưng với tri quay là ngày với giờ nào để đặt tên folder và frame cho đúng với thời gian quay
     "13-03-2026": "13-30-20",
     "16-03-2026": "20-00-30"
 }
