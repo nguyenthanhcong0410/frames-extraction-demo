@@ -6,7 +6,7 @@ import csv
 
 cv2.setNumThreads(0)
 
-video_folder = r"c:\Users\THANH CONG\Documents\RESFES\demo\raw video"
+video_folder = r"c:\Users\THANH CONG\Documents\RESFES\demo\raw video" 
 
 # Đường vào folder
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -29,7 +29,7 @@ def extract_frames(video_path, output_folder, start_frame, end_frame, fps, start
 
     frame_count = start_frame
     save_count = start_frame // int(fps) + 1
-    interval = max(1, int(fps))
+    interval = max(1, int(fps / 5)) # Lưu một frame mỗi giây, có thể điều chỉnh nếu muốn lưu nhiều hơn hoặc ít hơn
 
     while frame_count < end_frame:
 
